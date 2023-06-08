@@ -1,0 +1,8 @@
+Mortes = 
+CALCULATE (
+    SUM ('teste_dados DADOS_COVID'[new_deaths]),
+    FILTER (
+        ALL ('teste_dados DADOS_COVID'),
+        'teste_dados DADOS_COVID'[Período] <= MAX ( 'teste_dados DADOS_COVID'[Período] )
+    )
+)
