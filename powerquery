@@ -1,0 +1,11 @@
+let
+    Fonte = MySQL.Database("34.95.170.227:3306", "teste_dados", [ReturnSingleDatabase=true]),
+    teste_dados_DADOS_COVID = Fonte{[Schema="teste_dados",Item="DADOS_COVID"]}[Data],
+    #"Colunas Renomeadas" = Table.RenameColumns(teste_dados_DADOS_COVID,{{"date", "Período"}}),
+    #"Linhas Filtradas" = Table.SelectRows(#"Colunas Renomeadas", each ([place_type] = "city")),
+    #"Personalização Adicionada" = Table.AddColumn(#"Linhas Filtradas", "TextToBinary", each Text.ToBinary([city], 1252)),
+    #"Personalização Adicionada1" = Table.AddColumn(#"Personalização Adicionada", "LinesFromBinary", each Lines.FromBinary([TextToBinary])),
+    #"Personalização Adicionada2" = Table.AddColumn(#"Personalização Adicionada1", "Cidade", each Text.Combine([LinesFromBinary])),
+    #"Colunas Removidas" = Table.RemoveColumns(#"Personalização Adicionada2",{"LinesFromBinary", "TextToBinary"})
+in
+    #"Colunas Removidas"
