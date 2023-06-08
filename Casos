@@ -1,0 +1,7 @@
+Casos = 
+CALCULATE (
+    SUM ('teste_dados DADOS_COVID'[new_confirmed]),
+    FILTER (
+        ALL ('teste_dados DADOS_COVID'),
+        'teste_dados DADOS_COVID'[Período] <= MAX ( 'teste_dados DADOS_COVID'[Período] )
+    ))
