@@ -50,7 +50,7 @@ CALCULATE (
   
 3) Visão final do dashboard
   
-  <img src="/path/to/covid.png" alt="Alt text" title="Optional title">
+  <img src="/estatisticas-covid/covid.png" alt="Dashboard">
   
 5) Comentários Finais
   
