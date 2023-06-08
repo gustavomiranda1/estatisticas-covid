@@ -4,7 +4,16 @@ Passo-a-passo da construção do dashboard com as estatísticas de Covid-19:
 
 1) Extração com MYSQL e Power Query
   Após preenchidas as credenciais de conexão, importei a base DADOS_COVID e modelei através do Power Query:
-  https://github.com/gustavomiranda1/estatisticas-covid/blob/d15f807f6e36e7df1fc0194c309308bed3d134ab/Casos
+  
+  '''
+  Casos = 
+CALCULATE (
+    SUM ('teste_dados DADOS_COVID'[new_confirmed]),
+    FILTER (
+        ALL ('teste_dados DADOS_COVID'),
+        'teste_dados DADOS_COVID'[Período] <= MAX ( 'teste_dados DADOS_COVID'[Período] )
+    ))
+  '''
   
   Nessa modelagem, limpei a coluna de place_type para evitar confundir a informação de estados e cidades.
   Também corrigi o formato ANSI do campo [city] para UTF8, dessa forma exibindo os caracteres especiais.
